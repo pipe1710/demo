@@ -23,15 +23,15 @@ public class ArticleService {
         return this.articleRepository.findById(id);
     }
 
-//    public List<Article> findByName(String name) {
-//        return this.articleRepository.findAllByUserName(name);
-//    }
-//
-//    public User save(User user) {
-//        return this.userRepository.save(user);
-//    }
-//
-//    public void delete(User user) {
-//        this.userRepository.delete(user);
-//    }
+    public Optional<Article> findByCode(String code) {
+        return this.articleRepository.findByArticleCode(code);
+    }
+
+    public Article save(Article article) {
+        return this.articleRepository.save(article);
+    }
+
+    public void delete(Article article) {
+        this.articleRepository.delete(article);
+    }
 }
