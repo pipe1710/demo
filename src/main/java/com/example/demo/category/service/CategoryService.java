@@ -23,4 +23,8 @@ public class CategoryService {
         return this.categoryRepository.save(category);
     }
 
+    public Boolean existById(Long id) {
+        return this.categoryRepository.existsById(id);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.demo.article.controller;
 
 import com.example.demo.article.entity.Article;
 import com.example.demo.article.service.ArticleService;
+import com.example.demo.category.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,11 @@ import java.util.Optional;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final CategoryService categoryService;
 
-    public ArticleController(ArticleService articleService) {
+    public ArticleController(ArticleService articleService, CategoryService categoryService) {
         this.articleService = articleService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/article")
@@ -35,8 +38,13 @@ public class ArticleController {
     @PostMapping("/article")
     public ResponseEntity<?> save(@RequestBody Article article) {
         try {
-            Article articleSave = this.articleService.save(article);
-            return new ResponseEntity<>(articleSave, HttpStatus.CREATED);
+            if (categoryService.existById(article.getCategory().getCategoryId())){
+                Article articleSave = this.articleService.save(article);
+                return new ResponseEntity<>(articleSave, HttpStatus.CREATED);
+            }
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("La categoría no existe");
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -53,8 +61,8 @@ public class ArticleController {
                 articleDb.get().setCategory(article.getCategory());
                 articleDb.get().setArticleSalePrice(article.getArticleSalePrice());
                 articleDb.get().setArticlePurchasePrice(article.getArticlePurchasePrice());
-                articleService.save(articleDb.get());
-                return new ResponseEntity<>(HttpStatus.OK);
+                Article articleUpdate = articleService.save(articleDb.get());
+                return new ResponseEntity<>(articleUpdate, HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
