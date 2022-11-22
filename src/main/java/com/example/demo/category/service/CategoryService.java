@@ -5,7 +5,7 @@ import com.example.demo.category.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+//implementacion de la carpera de service para las categorias
 @Service
 public class CategoryService {
 

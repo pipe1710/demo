@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+//implementacion de la carpera de service para los articulos
 @Service
 public class ArticleService {
     private final ArticleRepository articleRepository;
