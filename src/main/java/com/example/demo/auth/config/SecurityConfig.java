@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
     private final String[] ROUTES_POST_ALLOWED_WITHOUT_AUTHENTICATION = {
             "/api/auth/login",
+            "/api/user",
             "/user/reset_password",
     };
 
