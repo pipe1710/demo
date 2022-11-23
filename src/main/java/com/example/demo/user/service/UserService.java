@@ -29,6 +29,10 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         user.setFirstName(userRequest.getFirstName());
         user.setLastName(userRequest.getLastName());
+        user.setAddress(userRequest.getAddress());
+        user.setPhoneNumber(userRequest.getPhoneNumber());
         return this.userRepository.save(user);
     }
+
+
 }

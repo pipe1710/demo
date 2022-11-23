@@ -32,6 +32,34 @@ public class UserRequest {
     @JsonProperty(value = "last_name")
     private String lastName;
 
+    @Size(max = 300)
+    @NotNull
+    @NotEmpty
+    @JsonProperty(value = "address")
+    private String address;
+
+    @Size(max = 20)
+    @NotNull
+    @NotEmpty
+    @JsonProperty(value = "phone_number")
+    private String phoneNumber;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getEmail() {
         return email;
     }

@@ -1,6 +1,7 @@
 package com.example.demo.article.entity;
 
 import com.example.demo.category.entity.Category;
+import com.example.demo.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -46,6 +47,8 @@ public class Article {
     @CreationTimestamp
     private Date createdAt;
 
+
+
     public Long getArticleId() {
         return articleId;
     }
@@ -90,9 +93,11 @@ public class Article {
         return category;
     }
 
+
     public void setCategory(Category category) {
         this.category = category;
     }
+
 
     public Double getArticleSalePrice() {
         return articleSalePrice;
