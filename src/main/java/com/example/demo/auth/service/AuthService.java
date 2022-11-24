@@ -5,7 +5,9 @@ import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.UserRepository;
 import com.example.demo.utils.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -55,5 +57,10 @@ public class AuthService implements UserDetailsService {
         User user = userRepository.findByEmail(email);
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities.stream().distinct().collect(Collectors.toList()));
+    }
+    public User getUserAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        return userRepository.findByEmail(userDetails.getUsername());
     }
 }

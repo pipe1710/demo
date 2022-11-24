@@ -1,4 +1,4 @@
-package com.example.demo.auth.config;
+/*package com.example.demo.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,3 +14,4 @@ public class GlobalConfig {
     }
 
 }
+*/

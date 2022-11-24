@@ -36,6 +36,10 @@ public class Article {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "article_sale_price",nullable = false)
     private Double articleSalePrice;
@@ -47,7 +51,13 @@ public class Article {
     @CreationTimestamp
     private Date createdAt;
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getArticleId() {
         return articleId;

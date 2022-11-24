@@ -2,10 +2,10 @@ package com.example.demo.article.controller;
 
 import com.example.demo.article.entity.Article;
 import com.example.demo.article.service.ArticleService;
+import com.example.demo.auth.service.AuthService;
 import com.example.demo.category.service.CategoryService;
-import com.example.demo.user.service.UserService;
-import com.example.demo.user.entity.User;
-import com.example.demo.user.service.UserService;
+
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +18,13 @@ public class ArticleController {
 
     private final ArticleService articleService;
     private final CategoryService categoryService;
+    private final AuthService authService;
 
 
-    public ArticleController(ArticleService articleService, CategoryService categoryService , UserService userService) {
+    public ArticleController(ArticleService articleService, CategoryService categoryService , AuthService authService) {
         this.articleService = articleService;
         this.categoryService = categoryService;
+        this.authService = authService;
     }
 
     @GetMapping("/article")
@@ -43,6 +45,7 @@ public class ArticleController {
     public ResponseEntity<?> save(@RequestBody Article article) {
         try {
             if (categoryService.existById(article.getCategory().getCategoryId())){
+                article.setUser(this.authService.getUserAuthenticated());
                 Article articleSave = this.articleService.save(article);
                 return new ResponseEntity<>(articleSave, HttpStatus.CREATED);
             }

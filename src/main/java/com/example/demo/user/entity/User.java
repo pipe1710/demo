@@ -35,5 +35,9 @@ public class User {
     @Column(name = "phone_number",nullable = false,length = 20)
     private String phoneNumber;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Article> articles;
+
 
 }
