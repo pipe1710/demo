@@ -16,10 +16,10 @@ public class Category {
     private Long categoryId;
 
     @Column(name = "category_name", length = 100,nullable = false, unique = true)
-    private String articleName;
+    private String categoryName;
 
     @Column(name = "category_description", length = 255)
-    private String articleDescription;
+    private String categoryDescription;
 
     @OneToMany(mappedBy = "category")
     @JsonIgnore
@@ -33,20 +33,20 @@ public class Category {
         this.categoryId = categoryId;
     }
 
-    public String getArticleName() {
-        return articleName;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setArticleName(String articleName) {
-        this.articleName = articleName;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public String getArticleDescription() {
-        return articleDescription;
+    public String getCategoryDescription() {
+        return categoryDescription;
     }
 
-    public void setArticleDescription(String articleDescription) {
-        this.articleDescription = articleDescription;
+    public void setCategoryDescription(String categoryDescription) {
+        this.categoryDescription = categoryDescription;
     }
 
     public List<Article> getArticles() {

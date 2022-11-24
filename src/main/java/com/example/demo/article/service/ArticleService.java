@@ -2,8 +2,6 @@ package com.example.demo.article.service;
 
 import com.example.demo.article.entity.Article;
 import com.example.demo.article.repository.ArticleRepository;
-import com.example.demo.user.entity.User;
-import jdk.jshell.spi.ExecutionControl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +16,23 @@ public class ArticleService {
     }
 
     public List<Article> getAll() {
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+
         return this.articleRepository.findAll();
     }
 
