@@ -69,7 +69,7 @@ class UserRepositoryTest {//test de repositorios
     }
 
     @Test
-    void should_delete_all_categories() {//debe eliminar todas las categorías
+    void should_delete_all_categories() {//debe eliminar todas las categorías.
         userRepository.deleteAll();
 
         assertThat(userRepository.findAll()).isEmpty();
