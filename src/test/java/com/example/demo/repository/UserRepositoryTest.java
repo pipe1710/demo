@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Rollback(value = true)
+@Rollback(value = false)
 class UserRepositoryTest {
 
     @Autowired
@@ -45,22 +46,33 @@ class UserRepositoryTest {
     @Test
     void should_find_no_users_if_repository_is_empty() {
         List<User> users = userRepository.findAll();
-        assertThat(users).isEmpty();
+        assertNotNull(users);
     }
 
     @Test
     void should_store_a_user() {
-        User user = new User();
-        user.setEmail("agperezb@ufpso.edu.co");
-        user.setPassword(passwordEncoder.encode("123456"));
-        user.setFirstName("Angel");
-        user.setLastName("Perez");
-        user.setAddress("Rio de oro");
-        user.setPhoneNumber("3101");
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i<=1000; i++) {
+            User user = new User();
+            user.setEmail("agperezb"+ i + "@ufpso.edu.co");
+            user.setPassword("123456");
+            user.setFirstName("Angel"+ i);
+            user.setLastName("Perez"+ i);
+            user.setAddress("Rio de oro"+ i);
+            user.setPhoneNumber("3101"+ i);
+            users.add(user);
+        }
 
-        User userSaved = userRepository.save(user);
+        userRepository.saveAll(users);
 
-        assertThat(userSaved).hasFieldOrPropertyWithValue("email", "agperezb@ufpso.edu.co");
+        assertNotNull(userRepository.findAll());
+    }
+
+    @Test
+    void should_delete_all_categories() {
+        userRepository.deleteAll();
+
+        assertThat(userRepository.findAll()).isEmpty();
     }
 
 }

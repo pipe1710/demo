@@ -28,7 +28,6 @@ class ArticleServiceTest {
     @Test
     void getAll() {
         List<Article> articles = articleService.getAll();
-
         assertThat(articles).isEmpty();
     }
 
