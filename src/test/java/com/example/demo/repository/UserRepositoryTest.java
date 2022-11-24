@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
-class UserRepositoryTest {
+class UserRepositoryTest {//test de repositorios
 
     @Autowired
     UserRepository userRepository;
@@ -36,21 +36,21 @@ class UserRepositoryTest {
     @Test
     void existRepository() {
         assertNotNull(userRepository);
-    }
+    }//identificando si existe el repositorio
 
     @Test
     void existPassEncoder() {
         assertNotNull(passwordEncoder);
-    }
+    }//identificando si encuentra el bean de password encoder
 
     @Test
     void should_find_no_users_if_repository_is_empty() {
-        List<User> users = userRepository.findAll();
+        List<User> users = userRepository.findAll();//si el repositorio esta vacio no deberia encontrar ningun usuario
         assertNotNull(users);
     }
 
     @Test
-    void should_store_a_user() {
+    void should_store_a_user() {//debe almacenar los usuarios
         List<User> users = new ArrayList<>();
         for (int i = 0; i<=1000; i++) {
             User user = new User();
@@ -69,7 +69,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void should_delete_all_categories() {
+    void should_delete_all_categories() {//debe eliminar todas las categorías
         userRepository.deleteAll();
 
         assertThat(userRepository.findAll()).isEmpty();

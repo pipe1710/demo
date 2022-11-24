@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = true)
-class CategoryRepositoryTest {
+class CategoryRepositoryTest {//test para las categorias
 
     @Autowired
     CategoryRepository categoryRepository;
@@ -26,14 +26,14 @@ class CategoryRepositoryTest {
     TestEntityManager testEntityManager;
 
     @Test
-    void should_find_no_tutorials_if_categories_is_empty() {
+    void should_find_no_tutorials_if_categories_is_empty() {//verifica que las categorias no esten vacias
         List<Category> categories = categoryRepository.findAll();
-
+        //assertThat Sirve para comparar un tipo de dato u objeto.
         assertThat(categories).isEmpty();
     }
 
     @Test
-    void should_store_a_category() {
+    void should_store_a_category() {//debe almacenar una categoria
         Category category1 = new Category();
         category1.setCategoryName("Category1");
         category1.setCategoryDescription("Decription1");
@@ -45,7 +45,7 @@ class CategoryRepositoryTest {
     }
 
     @Test
-    void should_find_all_category() {
+    void should_find_all_category() {//debería encontrar las categorías
         Category category1 = new Category();
         category1.setCategoryName("Categor1");
         category1.setCategoryDescription("Decripcion1");
@@ -67,7 +67,7 @@ class CategoryRepositoryTest {
     }
 
     @Test
-    void should_find_tutorial_by_id() {
+    void should_find_tutorial_by_id() {//deberia encontrar la categoria por id
         Category category1 = new Category();
         category1.setCategoryName("Ropa1");
         category1.setCategoryDescription("Categoria de ropa");
@@ -79,7 +79,7 @@ class CategoryRepositoryTest {
     }
 
     @Test
-    void should_delete_all_categories() {
+    void should_delete_all_categories() {//debe eliminar todas las categorías
         categoryRepository.deleteAll();
 
         assertThat(categoryRepository.findAll()).isEmpty();
